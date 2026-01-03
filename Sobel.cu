@@ -94,7 +94,7 @@ __global__ void Sobel(unsigned char *inputImage, unsigned char *outputImage,
 	cudaMemcpy(gpuInput, cpuImage, memorySize, cudaMemcpyHostToDevice);
 
 	Sobel<<< dim3(height,1,1), dim3(width,1,1) >>>(gpuInput, gpuOutput, width, height);
-	cudaThreadSynchronize();
+	cudaDeviceSynchronize();
 	
 	cudaMemcpy(cpuOutput, gpuOutput, memorySize, cudaMemcpyDeviceToHost);
 	
